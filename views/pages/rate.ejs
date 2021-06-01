@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/scale.css" />
+  <script src="js/rate.js"></script>
+</head>
+
+<body onload="init();">
+
+  <div class="jumbotron jumbotron-fluid text-center">
+    <h1>Survey on Creativity</h1>
+  </div>
+  <div class="container">
+    
+    <h2>Please rate the following creations:</h2>
+    <div class="form-group">
+      <label for="img_id">IMG</label>
+      <input type="number" class="form-control" id="img_id">
+      <label for="rater_id">Rater</label>
+      <input type="text" class="form-control" id="rater_id">
+      <button type="submit" class="btn btn-primary mb-2" id="lookupBtn">Lookup</button>
+    </div>
+    
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div id="description"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-10" style="border:1px solid #cecece;">
+        <div id="sketchpad"></div>
+      </div>
+      <div class="col-md-2" id="features">
+      </div>
+    </div>
+    <div class="row">
+      Other features: 
+      <input type="text" class="form-control" id="other">
+    </div>
+  </div>
+
+  <div class="container" id="rating">
+    <div class="row">
+      <div class="col-md-6 align-self-center" style="text-align: right;">Creativity Points</div>
+      <div class="col-md-6 radio-group" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;">
+        <div class="radio">
+          <label><input type="radio" name="q1" value="1" required> 1</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="2"> 2</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="3"> 3</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="4"> 4</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="5"> 5</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="6"> 6</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="q1" value="7"> 7</label>
+        </div>
+      </div>
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <div class="container" id="navigation">
+    <div class="text-center">
+      <a type="button" id="prevBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download"> Prev </a>
+      <a type="button" id="saveBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download"> Save </a>
+      <a type="button" id="nextBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download"> Next </a>
+    </div>
+  </div>
+
+</body>
+</html>

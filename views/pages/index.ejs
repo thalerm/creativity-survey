@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <script src="js/main.js"></script>  
+</head>
+
+<body onload="init();">
+
+  <div class="jumbotron jumbotron-fluid text-center">
+      <h1>Survey on Creativity</h1>
+  </div>
+
+  <!-- Circles which indicates the steps of the form: https://www.w3schools.com/howto/howto_js_form_steps.asp-->
+  <div style="text-align:center;margin-top:40px; margin-bottom: 40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+
+  <div>
+    <!--
+    <div class="alert alert-danger text-center" role="alert">
+      <h4>ATTENTION! Site is currently in MAINTANANCE, please do not use it for now, I kindly ask you to try again in 30 minutes.</h4>
+    </div>
+    -->
+    <div class="container tab" id="part-intro">
+      <div style="text-align: left;">
+        <div class="alert alert-danger" role="alert">
+          <h4>IMPORTANT! PLEASE READ CAREFULLY</h4>
+          In spite of the web survey format, this study is considered as an experiment, as it involves <i>drawing tasks.</i>
+          So I kindly ask you to read all of the following instructions carefully, before you click "NEXT", otherwise the scientific integrity of the study might be damaged.
+        </div>
+        <br><br>
+        <h3>Dear Participant,</h3>
+        thank you for joining this study on <b>creativity</b>, which I am carrying out as part of my master's thesis. It will take around <b>12 minutes</b> to complete.
+        The purpose of this study will be unveiled at the end of the survey, in order to avoid any bias. 
+        If you do not agree with the usage your provided data, you will still be able to disagree with the data privacy policies in the end, which will result in the deletion of all your data provided.
+        <br><br>
+        <div>
+          The study consists of 6 steps:
+          <ol>
+            <li><b>Introduction</b> (you are here)</li>
+            <li><b>Preparation:</b> (1:30 min)<br> You will have 90 seconds to read the instructions and prepare for the drawing task, after the timer runs out the webpage will automatically switch to step 3.</li>
+            <li><b>Drawing:</b> (7 min)<br> Create multiple drawings of creatures, after 7 minutes, the page will automatically continue with step 4. <br>
+              The drawing page consists of the following components:
+              <ul>
+                <li><i>Drawing canvas</i> to draw your creatures</li>
+                <li><i>Text area</i> to briefly describe the features of the creation (mandatory, 5-30 words)</li>
+                <li><i>"Undo" </i>button to undo your last stroke</li>
+                <li><i>"Clear canvas"</i> button</li>
+                <li><i>"Save & Create another"</i> button (clears canvas)</li>
+              </ul>
+            </li>
+            <li><b>A brief survey</b> (1 min)</li>
+            <li><b>Purpose of the study and submission</b> (1 min)</li>
+            <li><b>Submission complete!</b></li>
+          </ol>
+        </div>
+        <p>If you have any questions, write an email: <a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a></p>
+        <p>Best regards, <br> Markus Thaler</p>
+
+        <div class="alert alert-primary" role="alert">
+          <p>Please Note</p>
+          <ul>
+            <li>Do not focus on perfecting one drawing, what counts is creativity!</li>
+            <li>There are timing components in this study, but this does not mean that you need to rush.</li>
+            <li>Please use a computer with a mouse to complete the study</li>
+          </ul>
+        </div>
+        When you are ready, click NEXT to start the 90 seconds preparation phase.
+        <br><br>       
+      </div>
+    </div>
+
+    <div class="container tab" id="part-prep">
+      <div class="text-center">
+        <h4>Preparation Phase</h4>
+        Instructions: Imagine a planet just like Earth existing somewhere else in the universe. It is currently uninhabited. 
+        Your task will be to <b>design new creatures to inhabit the planet</b>. Within the approximately 7 minutes allotted in the next step,
+        draw as many new and different creatures of your own creative design as you are able. 
+        Duplication of creatures now extinct or living on the planet Earth is not permitted. 
+        <h3>Time Remaining: <span id=preptimer></span></h3>
+        <div id="examples"></div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-drawing">
+        Use the drawing canvas below to bring your creations to paper! Then submit them with <b>"Save & Create Another" and continue drawing your next creature.</b>
+        <h3>Time Remaining: <span id=drawtimer></span></h3>
+      <hr>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10" style="border:1px solid #cecece;">
+            <div id="sketchpad"></div>
+          </div>
+
+          <div class="col-md-2 text-center">
+            <div class="form-group">
+              <label for="description" id="label-desc"><p>Briefly describe the features of your creature (5-30 words):</p></label>
+              <textarea class="form-control" id="description" rows="6" placeholder="Enter a description"></textarea>
+            </div>
+           
+            <div>
+              <br>
+              <p><a type="button" id="undo" class="btn btn-block btn-secondary" >Undo</a></p>
+              <p><a type="button" id="clear" class="btn btn-block btn-secondary" >Clear Canvas</a></p>
+              <p><a type="button" id="saveandclear" class="btn btn-block btn-primary" >Save Drawing & Create Another</a></p> 
+              <p><span id="amount">0</span> Creature(s) submitted.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-survey">
+      <h2 style="text-align: center;">Please fill out this survey.</h2>
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">My imagination was stimulated.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq1">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="5"> Strongly Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="4"> Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="3"> Neutral</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="2"> Disagree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="1"> Strongly Disagree</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">I was intrigued by a new idea.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq2">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="5"> Strongly Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="4"> Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="3"> Neutral</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="2"> Disagree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="1"> Strongly Disagree</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">I unexpectedly and spontaneously got new ideas.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq3">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="5"> Strongly Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="4"> Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="3"> Neutral</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="2"> Disagree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="1"> Strongly Disagree</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">My horizon was broadened.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq4">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="5"> Strongly Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="4"> Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="3"> Neutral</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="2"> Disagree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="1"> Strongly Disagree</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">I discovered something new.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq5">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="5"> Strongly Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="4"> Agree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="3"> Neutral</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="2"> Disagree</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="1"> Strongly Disagree</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">Gender</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="gender">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="f"> female</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="m"> male</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="n"> other</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Self-assessment of your creativity</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="creativity">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="5"> 5 (well above average)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="4"> 4 (above average)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="3"> 3 (average)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="2"> 2 (below average)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="1"> 1 (well below average)</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">creative / artistic Background <br> (please select what you think fits the most to your artistic experience)</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="background">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="4"> Professionally creative activities (artist/designer/musician/poet/...)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="3"> Hobbyist creative activities (artist/designer/musician/poet/...)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="2"> Student in art/creativity related subjects (arts/design/philosophy/architecture/...)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="1"> No artistic background.</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Field of artistic Background <br></div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="occupation">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="6"> Visual arts</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="5"> Architecture</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="4"> Design</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="3"> Poetry</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="2"> Other artistic/creative field</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="occupation" value="1"> No artistic background.</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Highest completed education <br> </div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="education">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="1"> some secondary education (high school)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="2"> completed secondary education (graduated high school)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="3"> trade/technical/vocational training</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="4"> some undergraduate education (college or university)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="5"> completed undergraduate education</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="6"> some postgraduate education</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="7"> completed postgraduate education (masters or doctorate)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="education" value="0"> no answer</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">Age in Years</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;">
+          <div class="form-control">
+            <label  class="form-control-label"><input class="form-control-input" type="number" id="age" max="99" required></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-outro">
+      <div class="text-left">
+        <h2>Closing Remarks</h2>
+        The purpose of this study is to investigate the use of Generative Machine Learning as an enhancement of creative tasks.
+        Thus, the experiment was split into three groups:
+        <ul>
+          <li>A control group who was presented no inspiration in the preparation step.</li>
+          <li>A group who was presented pictures of Pokémon&reg; as inspiration</li>
+          <li>An experimental group who was presented pictures of Pokémon created by a generative algorithm (StyleGAN)</li>
+        </ul>
+        The creations of the participants will then be rated by a group of experts and be evaluated against the novelty of their features and their subjective creativity, in order to find out more about potential effects on human creativity.
+        The experimental setup was inspired by <a href="https://hci.stanford.edu/publications/2012/RepeatedExamplesCogSci2012/RepeatedExamplesCogSci2012.pdf">Kulkarni et al. (2020)</a> 
+        and <a href="https://link.springer.com/article/10.3758/BF03202751">Smith et al.(1993)</a>.
+        <p>If you wish to get the results of the study or have any other quesetions, send me an email: <a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a></p>
+        <p>None of the data used can be connected to your identity.</p>
+        
+        <div class="row">
+          <div class="col-md-6 text-right align-self-center" style="text-align: right;">I agree with the abovementioned usage of my provided data. <br></div>
+          <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="agree">
+            <div class="form-check">
+              <label class="form-check-label"><input class="form-check-input" type="radio" name="agree" value="yes"> Yes</label>
+            </div>
+            <div class="form-check">
+              <label class="form-check-label"><input class="form-check-input" type="radio" name="agree" value="no"> No</label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container tab " id="part-submitted">
+      <div class="text-center"><p>Submitted. Thank you for participating!</p></div>
+      <div class="text-center" id="mechturk"></div>
+      <div class="text-center"><p>You can close the tab after you have entered your personal code in MechanicalTurk.</p></div>
+    </div>
+  </div>
+
+  <div class="container" id="navigation">
+    <div class="text-center">
+      <div class="alert alert-danger" role="alert" id="alert-form", style="display: none;" >
+        Please fill out every question, then click "NEXT".
+      </div>
+      <p>
+        <a type="button" id="prevBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download" onclick="nextPrev(-1);" style="display: none;"></span>Previous</a>
+        <a type="button" id="nextBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download" onclick="nextPrev(1);"></span>Next</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>

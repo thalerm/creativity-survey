@@ -1,0 +1,33 @@
+/* https://codepen.io/skeddles/pen/PbROLK */
+body {
+  font-family: roboto;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: #0b5ed7;
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  background: #0b5ed7;;
+}
+
+label + input[type=radio] + label {
+  border-left: solid 3px #0b5ed7;;
+}
+.radio-group {
+  border: solid 3px #0b5ed7;;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}

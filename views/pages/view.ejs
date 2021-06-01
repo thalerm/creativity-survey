@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <script src="js/view.js"></script>
+</head>
+
+<body onload="init();">
+
+  <div class="jumbotron jumbotron-fluid text-center">
+    <h1>Survey on Creativity</h1>
+  </div>
+  <div class="container text-center">
+    <h2>View</h2>
+    <div class="form-group">
+      <label for="img_id">ID</label>
+      <input type="number" class="form-control" id="img_id">
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" id="lookupBtn">Lookup</button>
+    <div class="container-fluid" style="border:1px solid #cecece;">
+      <div id="sketchpad"></div>
+    </div>
+
+  </div>
+
+
+  <div class="container" id="navigation">
+    <div class="text-center">
+      <a type="button" id="prevBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download"> Prev </a>
+      <a type="button" id="nextBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download"> Next </a>
+    </div>
+  </div>
+  <div class="text-center" id="output"></div>
+  <div><pre id="json"></pre></div>
+</body>
+</html>

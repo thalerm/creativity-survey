@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ("../partials/header.ejs") %>
+  <script src="js/main.js"></script>  
+</head>
+
+<body onload="init();">
+
+  <div class="jumbotron jumbotron-fluid text-center">
+      <h1>Umfrage Kreativität</h1>
+  </div>
+
+  <!-- Circles which indicates the steps of the form: https://www.w3schools.com/howto/howto_js_form_steps.asp-->
+  <div style="text-align:center;margin-top:40px; margin-bottom: 40px;">
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+    <span class="step"></span>
+  </div>
+
+  <div>
+    <div class="container tab" id="part-intro">
+      <div style="text-align: left;">
+        <h3>Lieber Teilnehmer,</h3>
+        vielen Dank, dass Sie an dieser Studie über <b>Kreativität</b> und <b>Human-Computer-Interaction</b> teilnehmen, die ich im Rahmen meiner Masterarbeit durchführe. Das Ausfüllen wird etwa <b>12 Minuten</b> dauern.
+        Der Zweck dieser Studie wird am Ende der Umfrage enthüllt, um unterbewusste Einflüsse zu vermeiden. 
+        Sollten Sie mit der Verwendung Ihrer angegebenen Daten nicht einverstanden sein, haben Sie am Ende immer noch die Möglichkeit, den Datenschutzbestimmungen zu widersprechen, was die Löschung aller angegebenen Daten zur Folge hat.
+        Es würde mich sehr freuen, wenn Sie sich bereit erklären würden, im Anschluss ein kurzes Online-Interview (optional, max. 5 min) mit mir durchzuführen - geben Sie mir dazu bitte  <b>bevor Sie die Umfrage beginnen</b> per Mail Bescheid (<a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a>). Teilnehmer am anschließenden Interview haben die Möglichkeit einen von drei <b>€20 Amazon Gutscheinen</b> zu gewinnen.</p>
+        <br><br>
+        <div class="alert alert-danger" role="alert">
+          <h4>WICHTIG! BITTE SORGFÄLTIG LESEN</h4>
+          Trotz des Umfrage-Formats wird diese Studie als Experiment betrachtet, da sie <i>Zeichnungsaufgaben</i> beinhaltet.
+          Daher bitte ich Sie, die folgenden Anweisungen sorgfältig zu lesen, bevor Sie auf "Weiter" klicken, da sonst die wissenschaftliche Integrität der Studie beeinträchtigt werden könnte.
+        </div>
+        <div>
+          Die Studie besteht aus 6 Schritten:
+          <ol>
+            <li><b>Einführung</b> (Sie sind hier)</li>
+            <li><b>Vorbereitung:</b> (1:30 min)<br> Sie haben 90 Sekunden Zeit, die Zeichenaufgabe zu lesen und sich darauf vorzubereiten. Nach Ablauf des Timers wechselt die Webseite automatisch zu Schritt 3.</li>
+            <li><b>Zeichnen:</b> (7 min)<br> Erstellen Sie mehrere Zeichnungen nach den Angaben vom vorherigen Schritt. Nach 7 Minuten wird die Seite automatisch mit Schritt 4 fortfahren. <br>
+              Die Seite besteht aus den folgenden Komponenten:
+              <ul>
+                <li><i>Zeichenfläche</i> (links) zum Zeichnen </li>
+                <li><i>Textbereich</i> um die Merkmale der Zeichnung zu beschreiben (etwa 5 - 30 Wörter)</li>
+                <li><i>"Rückgängig" </i>Schaltfläche, um Ihren letzten Strich rückgängig zu machen</li>
+                <li><i>"Zeichenfläche löschen"</i> Schaltfläche, um die aktuelle Zeichnung zu löschen.</li>
+                <li><i>"Speichern & nächste"</i> Schaltfläche (leert die Zeichenfläche)</li>
+              </ul>
+            </li>
+            <li><b>Ein kurzer Fragebogen</b> (1 min)</li>
+            <li><b>Zweck der Studie und Abschicken</b> (1 min)</li>
+            <li><b>Einreichung abgeschlossen!</b></li>
+          </ol>
+        </div>
+
+        <p>Wenn Sie Fragen haben, schreiben Sie eine E-Mail: <a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a></p>
+        <p>Beste Grüße, <br> Markus Thaler</p>
+
+        <div class="alert alert-primary" role="alert">
+          <p>Bitte beachten</p>
+          <ul>
+            <li>Fokussieren Sie sich nicht darauf, eine Zeichnung zu perfektionieren, was zählt, ist Kreativität! (dafür ist das Online-Zeichentool auch nicht ausgelegt)</li>
+            <li>Es gibt zeitliche Komponenten in dieser Studie, aber das bedeutet nicht, dass Sie sich beeilen müssen.</li>
+            <li>Es wird ein Computer mit einer Maus zum Zeichnen auf der Zeichenfläche empfohlen</li>
+          </ul>
+        </div>
+        Wenn Sie bereit sind, klicken Sie auf "Weiter", um die 90-sekündige Vorbereitungsphase zu starten.
+        <br><br>       
+      </div>
+    </div>
+
+    <div class="container tab" id="part-prep">
+      <div class="text-center">
+        <h4>Vorbereitungsphase</h4>
+        Anweisungen: Stellen Sie sich einen Planeten wie die Erde vor, der irgendwo anders im Universum existiert. Er ist derzeit unbewohnt. 
+        Ihre Aufgabe ist es, <b>neue Lebewesen zu entwerfen, die den Planeten bewohnen</b>. Innerhalb der ca. 7 Minuten, die Ihnen im nächsten Schritt zur Verfügung stehen,
+        zeichnen Sie so viele neue und unterschiedliche Kreaturen Ihres eigenen kreativen Designs, wie Sie können. 
+        Das Kopieren von Lebewesen, die bereits ausgestorben sind oder auf der Erde bereits leben, ist nicht erlaubt. 
+        <h3>Verbleibende Zeit: <span id=preptimer></span></h3>
+        <div id="examples"></div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-drawing">
+        Verwenden Sie die Zeichenfläche unten, um Kreaturen für den Planeten zu zeichnen! Senden Sie sie jeweils mit <b>"Speichern und nächste Kreatur"</b> ab und zeichnen die nächste Kreatur.</b>
+        <h3>Verbleibende Zeit: <span id=drawtimer></span></h3>
+      <hr>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10" style="border:1px solid #cecece;">
+            <div id="sketchpad"></div>
+          </div>
+
+          <div class="col-md-2 text-center">
+            <div class="form-group">
+              <label for="description" id="label-desc"><p>Beschreiben Sie kurz die Merkmale Ihrer Kreatur (5-30 Wörter):</p></label>
+              <textarea class="form-control" id="description" rows="6" placeholder="Beschreibung eingeben"></textarea>
+            </div>
+           
+            <div>
+              <br>
+              <p><a type="button" id="undo" class="btn btn-block btn-secondary" >Rückgängig</a></p>
+              <p><a type="button" id="clear" class="btn btn-block btn-secondary" >Zeichenfläche löschen</a></p>
+              <p><a type="button" id="saveandclear" class="btn btn-block btn-primary" >Speichern und nächste Kreatur</a></p> 
+              <p><span id="amount">0</span> Kreatur(en) gespeichert.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-survey">
+      <h2 style="text-align: center;">Bitte füllen Sie diese Umfrage aus.</h2>
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">Meine Phantasie wurde angeregt.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq1">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="5"> trifft zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="4"> trifft eher zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="3"> teils-teils</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="2"> trifft eher nicht zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq1" value="1"> trifft nicht zu</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Ich war von einer neuen Idee fasziniert.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq2">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="5"> trifft zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="4"> trifft eher zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="3"> teils-teils</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="2"> trifft eher nicht zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq2" value="1"> trifft nicht zu</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Ich bekam unerwartet und spontan neue Ideen.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq3">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="5"> trifft zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="4"> trifft eher zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="3"> teils-teils</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="2"> trifft eher nicht zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq3" value="1"> trifft nicht zu</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Mein Horizont wurde erweitert.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq4">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="5"> trifft zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="4"> trifft eher zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="3"> teils-teils</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="2"> trifft eher nicht zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq4" value="1"> trifft nicht zu</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Ich habe etwas Neues entdeckt.</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="inspq5">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="5"> trifft zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="4"> trifft eher zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="3"> teils-teils</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="2"> trifft eher nicht zu</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="inspq5" value="1"> trifft nicht zu</label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">Geschlecht</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="gender">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="f"> weiblich</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="m"> männlich</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="gender" value="n"> andere</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Selbsteinschätzung Ihrer Kreativität</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="creativity">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="5"> 5 (überdurchschnittlich)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="4"> 4</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="3"> 3 (durchschnittlich)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="2"> 2</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="creativity" value="1"> 1 (unterdurchschnittlich)</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 text-right align-self-center" style="text-align: right;">Künstlerischer Hintergrund <br> (bitte wählen Sie was am ehesten zu Ihrer Erfahrung passt)</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;" id="creativity">
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="4"> Professioneller Künstler (Maler/Musiker/Poet/Designer/...)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="3"> Hobbykünstler (Maler/Musiker/Poet/Designer/...)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="2"> Kunststudent (oder andere künstlerische Ausbildung)</label>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label"><input class="form-check-input" type="radio" name="background" value="1"> kein künstlerischer Hintergrund</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 align-self-center" style="text-align: right;">Alter in Jahren</div>
+        <div class="col-md-6" style="margin-top: 10px; margin-bottom: 10px; border-left: solid thin;">
+          <div class="form-control">
+            <label  class="form-control-label"><input class="form-control-input" type="number" id="age" max="99" required></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container tab" id="part-outro">
+      <div class="text-left">
+        <h2>Abschließende Bemerkungen</h2>
+        Das Ziel dieser Studie ist es, den Einsatz von Generativem Maschinellem Lernen als Erweiterung von kreativen Aufgaben zu untersuchen.
+        Daher wurde das Experiment in drei Gruppen aufgeteilt:
+
+        <ul>
+          <li>Eine Kontrollgruppe, der im Vorbereitungsschritt keine Inspiration präsentiert wurde</li>
+          <li>Eine Gruppe, der Bilder von Pokémon&reg; Kreaturen als Inspiration präsentiert wurden</li>
+          <li>Eine Versuchsgruppe, der Bilder von Pokémon präsentiert wurden, die von einem generativen Algorithmus (StyleGAN) generiert wurden</li>
+        </ul>
+        Die Kreationen der Teilnehmer werden dann von einer Expertengruppe bewertet und hinsichtlich ihrer Neuartigkeit und subjektiven Kreativität beurteilt, um mehr über mögliche Auswirkungen auf die menschliche Kreativität herauszufinden.
+        Der Versuchsaufbau wurde inspiriert von <a href="https://hci.stanford.edu/publications/2012/RepeatedExamplesCogSci2012/RepeatedExamplesCogSci2012.pdf">Kulkarni et al. (2020)</a> 
+        und <a href="https://link.springer.com/article/10.3758/BF03202751">Smith et al.(1993)</a>. Ihre Daten werden selbstverständlich anonym und streng vertraulich behandelt.
+        <p>Wenn Sie die Ergebnisse der Studie erhalten möchten oder andere Fragen haben, senden Sie mir eine E-Mail: <a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a></p>
+        <div class="form-check" >
+          <input class="form-check-input" type="checkbox" value="1" id="agree">
+          <label class="form-check-label" for="agree">
+            Ich bin mit der oben genannten Verwendung meiner Daten einverstanden. 
+          </label>
+        </div>
+        
+      </div>
+    </div>
+
+    <div class="container tab " id="part-submitted">
+      <div class="text-center"><p>Eingereicht. Vielen Dank für Ihre Teilnahme!</p></div>
+      <div class="text-center" id="mechturk"></div>
+      <div class="text-center"><p>Für Teilnehmer am nachträglichen Interview: notieren Sie bitte den "Personal Code" und geben ihn nach dem Interview preis, um an der Verlosung von 3x€20 Amazon Gutscheinen teilzunehmen. Sollten Sie nachträglich am Interview interessiert sein, kontaktieren Sie mich: <a href="mailto:mark.thaler@mci4me.at">mark.thaler@mci4me.at</a></p> 
+        <p>Für Nutzer von SurveyCircle (www.surveycircle.com): Der Survey Code lautet: QRQ9-1BMK-L94L-8MB4</p>
+        <p>Survey Code mit einem Klick einlösen: <a href="https://www.surveycircle.com/QRQ9-1BMK-L94L-8MB4" target="_blank">https://www.surveycircle.com/QRQ9-1BMK-L94L-8MB4</a> </p>
+        <p>Sie können den Browsertab danach schließen.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="navigation">
+    <div class="text-center">
+      <div class="alert alert-danger" role="alert" id="alert-form", style="display: none;" >
+        Bitte füllen Sie jede Frage in der Umfrage aus und klicken Sie dann auf "Nächste".
+      </div>
+      <p>
+        <a type="button" id="prevBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download" onclick="nextPrev(-1);" style="display: none;"></span>Vorherige</a>
+        <a type="button" id="nextBtn" class="btn btn-lg btn-primary" class="glyphicon glyphicon-download" onclick="nextPrev(1);"></span>Nächste</a>
+      </p>
+    </div>
+  </div>
+
+</body>
+</html>
